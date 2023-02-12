@@ -61,8 +61,8 @@ class InsightFaceMixin:
 
 class FaceDetector(InsightFaceMixin, mixins.FaceDetectorMixin, base.BasePlugin):
     ml_models = (
-        ('retinaface_mnet025_v1', '1ggNFFqpe0abWz6V1A82rnxD6fyxB8W2c'),
-        ('retinaface_mnet025_v2', '1EYTMxgcNdlvoL1fSC8N1zkaWrX75ZoNL'),
+        # ('retinaface_mnet025_v1', '1ggNFFqpe0abWz6V1A82rnxD6fyxB8W2c'),
+        # ('retinaface_mnet025_v2', '1EYTMxgcNdlvoL1fSC8N1zkaWrX75ZoNL'),
         ('retinaface_r50_v1', '1LZ5h9f_YC5EdbIZAqVba9TKHipi90JBj'),
     )
 
