@@ -21,7 +21,7 @@ from typing import Any, Tuple, Optional
 from zipfile import ZipFile
 
 import attr
-import gdown
+# import gdown
 from cached_property import cached_property
 
 from src.services.dto.json_encodable import JSONEncodable
