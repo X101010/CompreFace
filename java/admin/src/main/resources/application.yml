@@ -1,5 +1,5 @@
 server:
-  port: ${CRUD_PORT:8080}
+  port: ${CRUD_PORT:8000}
 
 app:
   security:
@@ -33,9 +33,9 @@ spring:
       max-request-size: ${MAX_REQUEST_SIZE:10MB}
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${POSTGRES_URL:jdbc:postgresql://compreface-postgres-db:5432/frs}
-    username: ${POSTGRES_USER:postgres}
-    password: ${POSTGRES_PASSWORD:postgres}
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${POSTGRES_USER:admin}
+    password: ${POSTGRES_PASSWORD:admin}
     continue-on-error: true
     hikari:
       maximum-pool-size: 3
@@ -146,4 +146,4 @@ statistic:
 environment:
   servers:
     PYTHON:
-      url: ${PYTHON_URL:http://compreface-core:3000}
+      url: ${PYTHON_URL:http://localhost:3000}

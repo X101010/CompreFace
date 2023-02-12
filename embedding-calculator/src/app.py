@@ -60,4 +60,4 @@ if __name__ == '__main__':
     init_app_runtime()
     app = create_app(endpoints, do_add_docs=True)
     app.config.from_mapping(SECRET_KEY='dev')
-    app.run(host='0.0.0.0', port=ENV.ML_PORT, debug=True, use_debugger=False, use_reloader=False)
+    app.run(host='127.0.0.1', port=ENV.ML_PORT, debug=True, use_debugger=False, use_reloader=False)

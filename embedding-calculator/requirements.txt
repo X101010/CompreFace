@@ -5,7 +5,7 @@ flasgger==0.9.5
 Flask==1.1.2
 itsdangerous==2.0.1 # itsdangerous is a Flask dependency, update it with Flask
 jinja2<3.1.0 # jinja2 is a Flask dependency, update it with Flask
-gdown~=4.3.0
+#gdown~=4.3.0
 Werkzeug==1.0.1
 PyYAML==5.4.1
 
@@ -31,3 +31,8 @@ uWSGI==2.0.19
 
 # for successful import with tensorflow
 mtcnn~=0.1.0
+tensorflow==2.1.4
+protobuf==3.19.0
+tf-slim~=1.1.0
+mxnet==1.9.0
+insightface==0.1.5

@@ -43,7 +43,7 @@ public class Constants {
     public static final String STATUS_DESC = "Special parameter to show execution_time and plugin_version fields. Empty value - both fields eliminated, true - both fields included";
     public static final String PREDICTION_COUNT = "predictionCount";
     public static final String STATUS_DEFAULT_VALUE = "false";
-    public static final String PREDICTION_COUNT_DEFAULT_VALUE = "1";
+    public static final String PREDICTION_COUNT_DEFAULT_VALUE = "5";
     public static final String LIMIT_DEFAULT_VALUE = "0";
     public static final String IMAGE_WITH_ONE_FACE_DESC = "A picture with one face (accepted formats: jpeg, png).";
     public static final String IMAGE_ID_DESC = "Image Id from collection to compare with face.";

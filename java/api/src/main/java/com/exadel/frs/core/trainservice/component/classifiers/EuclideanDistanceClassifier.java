@@ -54,6 +54,7 @@ public class EuclideanDistanceClassifier implements Classifier {
         final INDArray embeddings = embeddingCollection.getEmbeddings();
 
         var result = new ArrayList<Pair<Double, String>>();
+        ArrayList<String> tmpSubjectName=new ArrayList<>();
         if (embeddings != null && embeddings.length() > 0) {
             val probabilities = recognize(inputFace, embeddings);
             val sortedIndexes = sortedIndexes(probabilities);
@@ -63,8 +64,10 @@ public class EuclideanDistanceClassifier implements Classifier {
             for (int i = 0; i < min(predictionCount, sortedIndexes.length); i++) {
                 var prob = probabilities[sortedIndexes[i]];
                 var embedding = indexMap.get(sortedIndexes[i]);
-
-                result.add(Pair.of(prob, embedding.getSubjectName()));
+                if(!tmpSubjectName.contains(embedding.getSubjectName())) {
+                    tmpSubjectName.add(embedding.getSubjectName());
+                    result.add(Pair.of(prob, embedding.getSubjectName()));
+                }
             }
         }
         return result;

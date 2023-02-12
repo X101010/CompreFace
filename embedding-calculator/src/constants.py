@@ -23,9 +23,15 @@ class ENV(Constants):
     ML_PORT = int(get_env('ML_PORT', '3000'))
     IMG_LENGTH_LIMIT = int(get_env('IMG_LENGTH_LIMIT', '640'))
 
-    FACE_DETECTION_PLUGIN = get_env('FACE_DETECTION_PLUGIN', 'facenet.FaceDetector')
-    CALCULATION_PLUGIN = get_env('CALCULATION_PLUGIN', 'facenet.Calculator')
-    EXTRA_PLUGINS = get_env_split('EXTRA_PLUGINS', 'facenet.LandmarksDetector,agegender.AgeDetector,agegender.GenderDetector,facenet.facemask.MaskDetector,facenet.PoseEstimator')
+    # facenet
+    # FACE_DETECTION_PLUGIN = get_env('FACE_DETECTION_PLUGIN', 'facenet.FaceDetector')
+    # CALCULATION_PLUGIN = get_env('CALCULATION_PLUGIN', 'facenet.Calculator')
+    # EXTRA_PLUGINS = get_env_split('EXTRA_PLUGINS', 'facenet.LandmarksDetector,agegender.AgeDetector,agegender.GenderDetector,facenet.facemask.MaskDetector,facenet.PoseEstimator')
+
+    # insightface
+    FACE_DETECTION_PLUGIN = get_env('FACE_DETECTION_PLUGIN', 'insightface.FaceDetector')
+    CALCULATION_PLUGIN = get_env('CALCULATION_PLUGIN', 'insightface.Calculator')
+    EXTRA_PLUGINS = get_env_split('EXTRA_PLUGINS','insightface.LandmarksDetector,insightface.AgeDetector,insightface.GenderDetector,insightface.facemask.MaskDetector,insightface.PoseEstimator')
 
     LOGGING_LEVEL_NAME = get_env('LOGGING_LEVEL_NAME', 'debug').upper()
     IS_DEV_ENV = get_env('FLASK_ENV', 'production') == 'development'

@@ -29,7 +29,7 @@ from src.services.dto import plugin_result
 
 
 logger = logging.getLogger(__name__)
-MODELS_ROOT = os.path.expanduser(os.path.join('~', '.models'))
+MODELS_ROOT = os.path.expanduser(os.path.join(os.path.dirname(__file__), '.models'))
 
 
 @attr.s(auto_attribs=True)
