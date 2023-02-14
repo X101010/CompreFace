@@ -180,6 +180,13 @@ public class ModelService {
         return model;
     }
 
+    @CollectStatistics(type = StatisticsType.FACE_ANTISPOOFING_CREATE)
+    public Model createAntiSpoofingModel(ModelCreateDto modelCreateDto, final String appGuid, final Long userId) {
+        Model model = createModel(modelCreateDto, appGuid, userId);
+        log.info("antiSpoofing model created: {}", model);
+        return model;
+    }
+
     @Transactional
     public Model cloneModel(
             final ModelCloneDto modelCloneDto,

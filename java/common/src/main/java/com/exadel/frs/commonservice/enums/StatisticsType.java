@@ -13,7 +13,9 @@ public enum StatisticsType {
     APP_CREATE("AC"),
     FACE_DETECTION_CREATE("DC"),
     FACE_RECOGNITION_CREATE("RC"),
-    FACE_VERIFICATION_CREATE("VC");
+    FACE_VERIFICATION_CREATE("VC"),
+    FACE_ANTISPOOFING_CREATE("ASC");
+
 
     @Getter
     @Setter

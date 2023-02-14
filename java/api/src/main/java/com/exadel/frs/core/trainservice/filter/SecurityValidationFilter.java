@@ -19,6 +19,7 @@ package com.exadel.frs.core.trainservice.filter;
 import static com.exadel.frs.commonservice.enums.ModelType.DETECTION;
 import static com.exadel.frs.commonservice.enums.ModelType.RECOGNITION;
 import static com.exadel.frs.commonservice.enums.ModelType.VERIFY;
+import static com.exadel.frs.commonservice.enums.ModelType.ANTISPOOFING;
 import static com.exadel.frs.commonservice.enums.ValidationResult.OK;
 import static com.exadel.frs.core.trainservice.system.global.Constants.API_V1;
 import static com.exadel.frs.core.trainservice.system.global.Constants.X_FRS_API_KEY_HEADER;
@@ -155,6 +156,9 @@ public class SecurityValidationFilter implements Filter {
             return VERIFY;
         } else if (url.contains(API_V1 + "/recognition")) {
             return RECOGNITION;
+        }
+        else if (url.contains(API_V1 + "/antiSpoofing")) {
+            return ANTISPOOFING;
         }
 
         throw new IncorrectModelTypeException(url.substring(API_V1.length()));

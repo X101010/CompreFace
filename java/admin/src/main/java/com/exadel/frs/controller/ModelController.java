@@ -55,6 +55,8 @@ public class ModelController {
     public static final String RECOGNITION = "RECOGNITION";
     public static final String VERIFY = "VERIFY";
 
+    public static final String ANTISPOOFING = "ANTISPOOFING";
+
     private final ModelService modelService;
     private final MlModelMapper modelMapper;
 
@@ -106,6 +108,9 @@ public class ModelController {
                 break;
             case VERIFY:
                 model = modelService.createVerificationModel(modelCreateDto, appGuid, SecurityUtils.getPrincipalId());
+                break;
+            case ANTISPOOFING:
+                model = modelService.createAntiSpoofingModel(modelCreateDto, appGuid, SecurityUtils.getPrincipalId());
                 break;
             default:
                 throw new IncorrectModelTypeException(modelCreateDto.getType());
