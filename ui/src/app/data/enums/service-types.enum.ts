@@ -17,5 +17,5 @@ export enum ServiceTypes {
   Recognition = 'RECOGNITION',
   Detection = 'DETECTION',
   Verification = 'VERIFY',
-  AntiSpoofing = 'AntiSpoofing',
+  AntiSpoofing = 'ANTISPOOFING',
 }

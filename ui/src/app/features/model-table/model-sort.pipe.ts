@@ -36,6 +36,10 @@ export class ModelSortPipe implements PipeTransform {
       .filter(model => model.type === ServiceTypes.Verification)
       .sort((model, next) => model.name.localeCompare(next.name));
 
-    return [...recognition, ...detection, ...verification];
+    const antispoofing = modelCollection
+      .filter(model => model.type === ServiceTypes.AntiSpoofing)
+      .sort((model, next) => model.name.localeCompare(next.name));
+
+    return [...recognition, ...detection, ...verification, ...antispoofing];
   }
 }
