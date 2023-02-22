@@ -1,9 +1,8 @@
 package com.exadel.frs.commonservice.repository;
 
-import com.exadel.frs.commonservice.entity.Embedding;
-import com.exadel.frs.commonservice.entity.EmbeddingProjection;
-import com.exadel.frs.commonservice.entity.EnhancedEmbeddingProjection;
-import com.exadel.frs.commonservice.entity.Subject;
+import com.exadel.frs.commonservice.entity.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -68,6 +67,15 @@ public interface EmbeddingRepository extends JpaRepository<Embedding, UUID> {
             "   e.subject.apiKey = :apiKey" +
             "   and (cast(:subjectName as string) is null or e.subject.subjectName = :subjectName)")
     Page<EmbeddingProjection> findBySubjectApiKeyAndSubjectName(String apiKey, String subjectName, Pageable pageable);
+
+    @Query("select " +
+            " e.id as id,e.subject.subjectName as subjectName,e.createdDate as createdDate" +
+            " from " +
+            "   Embedding e " +
+            " where " +
+            "   e.subject.apiKey = :apiKey" +
+            "   and e.createdDate > :deadLineTime")
+    List<EmbeddingResponseTimeProjection> findBySubjectApiKeyAndTime(String apiKey, LocalDateTime deadLineTime);
 
     @Query("select distinct(e.calculator) from Embedding e")
     List<String> getUniqueCalculators();

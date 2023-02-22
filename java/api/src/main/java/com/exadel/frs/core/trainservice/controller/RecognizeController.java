@@ -17,42 +17,22 @@
 package com.exadel.frs.core.trainservice.controller;
 
 import static com.exadel.frs.commonservice.system.global.Constants.DET_PROB_THRESHOLD;
-import static com.exadel.frs.core.trainservice.system.global.Constants.API_KEY_DESC;
-import static com.exadel.frs.core.trainservice.system.global.Constants.API_V1;
-import static com.exadel.frs.core.trainservice.system.global.Constants.DET_PROB_THRESHOLD_DESC;
-import static com.exadel.frs.core.trainservice.system.global.Constants.FACE_PLUGINS;
-import static com.exadel.frs.core.trainservice.system.global.Constants.FACE_PLUGINS_DESC;
-import static com.exadel.frs.core.trainservice.system.global.Constants.IMAGE_FILE_DESC;
-import static com.exadel.frs.core.trainservice.system.global.Constants.LIMIT_DEFAULT_VALUE;
-import static com.exadel.frs.core.trainservice.system.global.Constants.LIMIT_DESC;
-import static com.exadel.frs.core.trainservice.system.global.Constants.LIMIT_MIN_DESC;
-import static com.exadel.frs.core.trainservice.system.global.Constants.NUMBER_VALUE_EXAMPLE;
-import static com.exadel.frs.core.trainservice.system.global.Constants.PREDICTION_COUNT;
-import static com.exadel.frs.core.trainservice.system.global.Constants.PREDICTION_COUNT_DEFAULT_VALUE;
-import static com.exadel.frs.core.trainservice.system.global.Constants.PREDICTION_COUNT_DESC;
-import static com.exadel.frs.core.trainservice.system.global.Constants.PREDICTION_COUNT_MIN_DESC;
-import static com.exadel.frs.core.trainservice.system.global.Constants.PREDICTION_COUNT_REQUEST_PARAM;
-import static com.exadel.frs.core.trainservice.system.global.Constants.STATUS;
-import static com.exadel.frs.core.trainservice.system.global.Constants.STATUS_DEFAULT_VALUE;
-import static com.exadel.frs.core.trainservice.system.global.Constants.STATUS_DESC;
-import static com.exadel.frs.core.trainservice.system.global.Constants.X_FRS_API_KEY_HEADER;
+import static com.exadel.frs.core.trainservice.system.global.Constants.*;
+import com.exadel.frs.commonservice.entity.EmbeddingResponseTimeProjection;
 import com.exadel.frs.core.trainservice.dto.Base64File;
 import com.exadel.frs.core.trainservice.dto.FacesRecognitionResponseDto;
 import com.exadel.frs.core.trainservice.dto.ProcessImageParams;
+import com.exadel.frs.core.trainservice.service.EmbeddingService;
 import com.exadel.frs.core.trainservice.service.FaceProcessService;
 import io.swagger.annotations.ApiParam;
 import java.util.Collections;
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -60,8 +40,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 @Validated
 public class RecognizeController {
-
     private final FaceProcessService recognitionService;
+    private EmbeddingService embeddingService;
 
     @PostMapping(value = "/recognition/recognize", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public FacesRecognitionResponseDto recognize(
@@ -142,4 +122,34 @@ public class RecognizeController {
 
         return (FacesRecognitionResponseDto) recognitionService.processImage(processImageParams);
     }
+    @GetMapping(value = "/recognition/recognize")
+    public List<EmbeddingResponseTimeProjection> listEmbeddingsByTime(
+            @ApiParam(value = API_KEY_DESC, required = true)
+            @RequestHeader(X_FRS_API_KEY_HEADER)
+            final String apiKey,
+            @ApiParam(value = LIMIT_DESC, example = NUMBER_VALUE_EXAMPLE)
+            @RequestParam(defaultValue = LIMIT_DEFAULT_VALUE, required = false)
+            @Min(value = 0, message = LIMIT_MIN_DESC)
+            final Integer limit,
+            @ApiParam(value = DET_PROB_THRESHOLD_DESC, example = NUMBER_VALUE_EXAMPLE)
+            @RequestParam(value = DET_PROB_THRESHOLD, required = false)
+            final Double detProbThreshold,
+            @ApiParam(value = FACE_PLUGINS_DESC)
+            @RequestParam(value = FACE_PLUGINS, required = false, defaultValue = "")
+            final String facePlugins,
+            @ApiParam(value = STATUS_DESC)
+            @RequestParam(value = STATUS, required = false, defaultValue = STATUS_DEFAULT_VALUE)
+            final Boolean status,
+            @ApiParam(value = PREDICTION_COUNT_DESC, example = NUMBER_VALUE_EXAMPLE)
+            @RequestParam(value = PREDICTION_COUNT_REQUEST_PARAM, required = false, defaultValue = PREDICTION_COUNT_DEFAULT_VALUE)
+            @Min(value = 1, message = PREDICTION_COUNT_MIN_DESC)
+            final Integer predictionCount,
+            @ApiParam(value = TIME_DESC, example = NUMBER_VALUE_EXAMPLE)
+            @RequestParam(value = TIME_REQUEST_PARAM, required = false, defaultValue = TIME_DEFAULT_VALUE)
+            @Min(value = 1, message = TIME_MIN_DESC)
+            final Integer time
+    ){
+        return embeddingService.listEmbeddingsByTime(apiKey,time);
+    }
+
 }

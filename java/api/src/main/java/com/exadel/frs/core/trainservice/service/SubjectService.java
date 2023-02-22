@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -201,7 +202,8 @@ public class SubjectService {
         var embeddingToSave = new EmbeddingInfo(
                 findFacesResponse.getPluginsVersions().getCalculator(),
                 normalized,
-                content
+                content,
+                LocalDateTime.now()
         );
 
         final Pair<Subject, Embedding> pair = subjectDao.addEmbedding(modelKey, subjectName, embeddingToSave);

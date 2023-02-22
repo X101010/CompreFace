@@ -1,12 +1,11 @@
 package com.exadel.frs.core.trainservice.service;
 
-import com.exadel.frs.commonservice.entity.Embedding;
-import com.exadel.frs.commonservice.entity.EmbeddingProjection;
-import com.exadel.frs.commonservice.entity.EnhancedEmbeddingProjection;
-import com.exadel.frs.commonservice.entity.Img;
+import com.exadel.frs.commonservice.entity.*;
 import com.exadel.frs.commonservice.repository.EmbeddingRepository;
 import com.exadel.frs.commonservice.repository.ImgRepository;
 import com.exadel.frs.core.trainservice.system.global.Constants;
+
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -54,6 +53,11 @@ public class EmbeddingService {
 
     public Page<EmbeddingProjection> listEmbeddings(String apiKey, String subjectName, Pageable pageable) {
         return embeddingRepository.findBySubjectApiKeyAndSubjectName(apiKey, subjectName, pageable);
+    }
+    public List<EmbeddingResponseTimeProjection> listEmbeddingsByTime(String apiKey, Integer time) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime deadLineTime = currentTime.minusDays(time);
+        return embeddingRepository.findBySubjectApiKeyAndTime(apiKey, deadLineTime);
     }
 
     public boolean isDemoCollectionInconsistent() {

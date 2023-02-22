@@ -8,6 +8,7 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -40,6 +41,8 @@ public class Embedding {
 
     @Column(nullable = false)
     private String calculator;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
 
     // Optional.
     // There could be predefined embeddings without image (pre-inserted demo embeddings).

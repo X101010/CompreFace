@@ -4,6 +4,7 @@ import lombok.Value;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Value
 public class EmbeddingInfo {
@@ -16,4 +17,6 @@ public class EmbeddingInfo {
 
     @Nullable
     byte[] source;
+    @NotNull
+    LocalDateTime createdDate;
 }
